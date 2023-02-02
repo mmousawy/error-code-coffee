@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 // Contexts
 import { PlayerContext } from '../../PlayerContext';
@@ -66,8 +66,11 @@ export default function Player() {
   return (
     <>
       <div
-        className={ [ styles.player, playerContext.loading ? styles.playerLoading : '' ].join(' ') }
-        style={ { transform: playerContext.episode ? '' : 'translateY(100%)' } }
+        className={ [
+          styles.player,
+          playerContext.loading ? styles.playerLoading : '',
+          playerContext.episode ? styles.playerVisible : '',
+        ].join(' ') }
       >
         <div className={ styles.playerGutter }>
           <div className={ styles.playerInside }>
@@ -99,15 +102,15 @@ export default function Player() {
                   <span>{ formatTime(playerContext.newProgress !== -1 ? playerContext.newProgress : playerContext.progress) }</span> / <span>{ formatTime(playerContext.duration) }</span>
                 </div>
                 <div className={ styles.playerPlaybackSpeed }>
-                  <button onClick={ playerContext.togglePlaybackSpeed }>
+                  <button onClick={ playerContext.togglePlaybackSpeed } aria-label='Toggle plaback rate'>
                     { playerContext.playbackSpeed === 1 && (
-                      <IconSpeedOne className={ styles.playerPlaybackSpeedIcon } />
+                      <IconSpeedOne className={ styles.playerPlaybackSpeedIcon } aria-hidden />
                     ) }
                     { playerContext.playbackSpeed === 1.5 && (
-                      <IconSpeedOnePointFive className={ styles.playerPlaybackSpeedIcon } />
+                      <IconSpeedOnePointFive className={ styles.playerPlaybackSpeedIcon } aria-hidden />
                     ) }
                     { playerContext.playbackSpeed === 2 && (
-                      <IconSpeedTwo className={ styles.playerPlaybackSpeedIcon } />
+                      <IconSpeedTwo className={ styles.playerPlaybackSpeedIcon } aria-hidden />
                     ) }
                   </button>
                 </div>

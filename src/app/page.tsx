@@ -40,7 +40,7 @@ export default async function Home() {
       <header className={ styles.header }>
         <aside className={ [ styles.headerAside, styles['hidden-to-s' ] ].join(' ') }>
           <p className={ styles.headerAsideText }>
-            <span>Hosted by</span> <a href='https://twitter.com/gideonheilbron'>Gideon Heilbron</a> <span>&amp;</span> <a href='https://twitter.com/mmousawy'>Murtada al Mousawy</a>
+            <span>Hosted by</span> <a href='https://twitter.com/gideonheilbron' target='_blank' rel='noopener noreferrer'>Gideon Heilbron</a> <span>&amp;</span> <a href='https://twitter.com/mmousawy' target='_blank' rel='noopener noreferrer'>Murtada al Mousawy</a>
           </p>
         </aside>
         <div className={ styles.headerContent }>
@@ -92,7 +92,7 @@ export default async function Home() {
           { introText }
         </p>
         <p className={ styles.headerAsideText }>
-          <span>Hosted by<br className={ styles['hidden-from-s'] } /></span> <a href='https://twitter.com/gideonheilbron'>Gideon Heilbron</a> <span>&amp;</span> <a href='https://twitter.com/mmousawy'>Murtada al Mousawy</a>
+          <span>Hosted by<br className={ styles['hidden-from-s'] } /></span> <a href='https://twitter.com/gideonheilbron' target='_blank' rel='noopener noreferrer'>Gideon Heilbron</a> <span>&amp;</span> <a href='https://twitter.com/mmousawy' target='_blank' rel='noopener noreferrer'>Murtada al Mousawy</a>
         </p>
       </footer>
     </>

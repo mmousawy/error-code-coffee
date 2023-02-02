@@ -12,6 +12,7 @@
   backdrop-filter: blur(.25rem);
   border-top: 1px solid var(--color-border);
   transition: transform 500ms;
+  transform: translateY(100%);
 
   @include max(s) {
     left: 0;
@@ -24,6 +25,10 @@
     left: 24rem;
     width: calc(100% - 24rem);
   }
+}
+
+.playerVisible {
+  transform: translateY(0);
 }
 
 .playerGutter {

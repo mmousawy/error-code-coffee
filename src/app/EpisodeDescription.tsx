@@ -6,7 +6,7 @@ import styles from './page.module.scss';
 
 export default function LogButton(props: any) {
   const [ showMore, setShowMore ] = useState(false);
-  const [ isTooBig, setIsTooBig ] = useState(false);
+  const [ isTooBig, setIsTooBig ] = useState(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
@@ -51,7 +51,7 @@ export default function LogButton(props: any) {
     return () => {
       removeEventListener('resize', resizeHandler);
     };
-  }, [ containerRef.current, descriptionRef.current ]);
+  }, [ containerRef, descriptionRef ]);
 
   return (
     <>
@@ -69,7 +69,9 @@ export default function LogButton(props: any) {
 
       </div>
       { isTooBig && (
-        <button className={ styles.showMoreButton } onClick={ () => setShowMore(!showMore) }>{ !showMore ? 'Show more' : 'Show less'}</button>
+        <button className={ styles.showMoreButton } onClick={ () => setShowMore(!showMore) }>
+          { !showMore ? 'Show more' : 'Show less'}
+        </button>
       ) }
     </>
   );
