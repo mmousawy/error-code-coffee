@@ -13,7 +13,7 @@ import styles from './page.module.scss';
 
 export default function EpisodeButton(props: any) {
   const playerContext = useContext(PlayerContext);
-  const duration = props.episode.itunes.duration;
+  const duration = props.episode.itunes.duration.replace(/^00:/, '');
 
   return (
     <>
