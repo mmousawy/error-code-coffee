@@ -55,13 +55,13 @@ export default function PlayerContextProvider({ children }: { children: any }) {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(paused ? 'Paused' : 'Playing');
-  }, [ paused ]);
+  // useEffect(() => {
+  //   console.log(paused ? 'Paused' : 'Playing');
+  // }, [ paused ]);
 
-  useEffect(() => {
-    console.log(loading ? 'Loading' : 'Done');
-  }, [ loading ]);
+  // useEffect(() => {
+  //   console.log(loading ? 'Loading' : 'Done');
+  // }, [ loading ]);
 
   const load = (episode: any) => {
     if (!audio) {
@@ -81,13 +81,16 @@ export default function PlayerContextProvider({ children }: { children: any }) {
     }, 10);
   };
 
-  const updateProgressVisual = (event: MouseEvent, seekBar: HTMLDivElement) => {
+  const updateProgressVisual = (event: MouseEvent&TouchEvent, seekBar: HTMLDivElement) => {
     if (!audio) {
       return;
     }
 
     const rect = seekBar.getBoundingClientRect();
-    let percentage = (event.clientX - rect.left) / rect.width;
+
+    const posX = event.touches?.length ? event.touches[0].clientX : event.clientX;
+
+    let percentage = (posX - rect.left) / rect.width;
     percentage = Math.min(Math.max(percentage, 0), 1);
 
     setNewProgress(audio.duration * percentage);
@@ -135,10 +138,8 @@ export default function PlayerContextProvider({ children }: { children: any }) {
   };
 
   return (
-    <>
-      <PlayerContext.Provider value={ state }>
-        { children }
-      </PlayerContext.Provider>
-    </>
+    <PlayerContext.Provider value={ state }>
+      { children }
+    </PlayerContext.Provider>
   );
 }

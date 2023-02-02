@@ -39,27 +39,25 @@ export default function Player() {
   };
 
   const startDrag = (event: React.TouchEvent|React.MouseEvent) => {
-    event.preventDefault(); // prevent selection start (browser action)
     playerContext.updateProgressVisual(event, seekBarRef.current);
 
     document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('touchmove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('touchend', onMouseUp);
 
-    function onMouseMove(event: MouseEvent) {
+    function onMouseMove(event: MouseEvent|TouchEvent) {
       playerContext.updateProgressVisual(event, seekBarRef.current);
     }
 
     function onMouseUp() {
-      document.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('touchmove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('touchend', onMouseUp);
       playerContext.setRequestUpdateProgress(true);
     }
   };
-
-  const renderProgressInTime = useCallback(() => {
-    const progressTime = formatTime(playerContext.progress);
-    return `${ progressTime }`;
-  }, [ playerContext.progress, playerContext.duration ]);
 
   const progressPercentage = (playerContext.newProgress !== -1)
     ? (playerContext.newProgress / playerContext.duration) * 100
@@ -71,45 +69,49 @@ export default function Player() {
         className={ [ styles.player, playerContext.loading ? styles.playerLoading : '' ].join(' ') }
         style={ { transform: playerContext.episode ? '' : 'translateY(100%)' } }
       >
-        <button
-          onClick={ playOrPause }
-          aria-label={ playerContext.paused ? 'Play' : 'Pause' }
-          className={ styles.playButton }
-        >
-          { playerContext.loading
-            ? <IconLoading aria-hidden />
-            : ( playerContext.paused
-              ? <IconPlay aria-hidden />
-              : <IconPause aria-hidden style={ { width: '20px', height: '20px' } } />
-            )
-          }
-        </button>
-        <div className={ styles.playerContent }>
-          <p className={ styles.playerTitle }>{ playerContext.episode?.title || '' }</p>
-          <div className={ styles.playerControls }>
-            <div ref={ seekBarRef } className={ styles.playerSeekbar } onTouchStart={ startDrag } onMouseDown={ startDrag } onMouseEnter={ () => setHover(true) } onMouseLeave={ () => setHover(false) }>
-              <div className={ styles.playerSeekbarBackground }>
-                <div className={ styles.playerSeekbarProgress } style={ { width: `calc(${ progressPercentage }% - ${ hover ? '.375rem' : '.3125rem' } )` } }></div>
+        <div className={ styles.playerGutter }>
+          <div className={ styles.playerInside }>
+            <button
+              onClick={ playOrPause }
+              aria-label={ playerContext.paused ? 'Play' : 'Pause' }
+              className={ styles.playButton }
+            >
+              { playerContext.loading
+                ? <IconLoading aria-hidden />
+                : ( playerContext.paused
+                  ? <IconPlay aria-hidden />
+                  : <IconPause aria-hidden style={ { width: '20px', height: '20px' } } />
+                )
+              }
+            </button>
+            <div className={ styles.playerContent }>
+              <p className={ styles.playerTitle }>{ playerContext.episode?.title || '' }</p>
+              <div className={ styles.playerControls }>
+                <div ref={ seekBarRef } className={ styles.playerSeekbar } onTouchStart={ startDrag } onMouseDown={ startDrag } onMouseEnter={ () => setHover(true) } onMouseLeave={ () => setHover(false) }>
+                  <div className={ styles.playerSeekbarBackground }>
+                    <div className={ styles.playerSeekbarProgress } style={ { width: `calc(${ progressPercentage }% - ${ hover ? '.375rem' : '.3125rem' } )` } }></div>
+                  </div>
+                  <div className={ styles.playerSeekbarPosition } style={ { left: `${ progressPercentage }%` } }>
+                    <div className={ styles.playerSeekbarThumb } data-seekbar-thumb />
+                  </div>
+                </div>
+                <div className={ styles.playerTime }>
+                  <span>{ formatTime(playerContext.newProgress !== -1 ? playerContext.newProgress : playerContext.progress) }</span> / <span>{ formatTime(playerContext.duration) }</span>
+                </div>
+                <div className={ styles.playerPlaybackSpeed }>
+                  <button onClick={ playerContext.togglePlaybackSpeed }>
+                    { playerContext.playbackSpeed === 1 && (
+                      <IconSpeedOne className={ styles.playerPlaybackSpeedIcon } />
+                    ) }
+                    { playerContext.playbackSpeed === 1.5 && (
+                      <IconSpeedOnePointFive className={ styles.playerPlaybackSpeedIcon } />
+                    ) }
+                    { playerContext.playbackSpeed === 2 && (
+                      <IconSpeedTwo className={ styles.playerPlaybackSpeedIcon } />
+                    ) }
+                  </button>
+                </div>
               </div>
-              <div className={ styles.playerSeekbarPosition } style={ { left: `${ progressPercentage }%` } }>
-                <div className={ styles.playerSeekbarThumb } data-seekbar-thumb />
-              </div>
-            </div>
-            <div className={ styles.playerTime }>
-              <span>{ formatTime(playerContext.newProgress !== -1 ? playerContext.newProgress : playerContext.progress) }</span> / <span>{ formatTime(playerContext.duration) }</span>
-            </div>
-            <div className={ styles.playerPlaybackSpeed }>
-              <button onClick={ playerContext.togglePlaybackSpeed }>
-                { playerContext.playbackSpeed === 1 && (
-                  <IconSpeedOne className={ styles.playerPlaybackSpeedIcon } />
-                ) }
-                { playerContext.playbackSpeed === 1.5 && (
-                  <IconSpeedOnePointFive className={ styles.playerPlaybackSpeedIcon } />
-                ) }
-                { playerContext.playbackSpeed === 2 && (
-                  <IconSpeedTwo className={ styles.playerPlaybackSpeedIcon } />
-                ) }
-              </button>
             </div>
           </div>
         </div>

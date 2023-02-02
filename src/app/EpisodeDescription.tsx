@@ -68,7 +68,7 @@ export default function LogButton(props: any) {
         } />
 
       </div>
-      {isTooBig && (
+      { isTooBig && (
         <button className={ styles.showMoreButton } onClick={ () => setShowMore(!showMore) }>{ !showMore ? 'Show more' : 'Show less'}</button>
       ) }
     </>

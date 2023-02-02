@@ -3,19 +3,56 @@
 
 .player {
   position: fixed;
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+  z-index: 10;
+  left: 28rem;
   bottom: 0;
   width: calc(100% - 28rem);
   height: 6.5rem;
-  margin: 0 0 0 28rem;
-  padding: 1rem 1.5rem;
   background-color: rgba(var(--color-background-rgb), .85);
   backdrop-filter: blur(.25rem);
   border-top: 1px solid var(--color-border);
-
   transition: transform 500ms;
+
+  @include max(s) {
+    left: 0;
+    width: 100%;
+    height: 5.5rem;
+    bottom: -.375rem;
+  }
+
+  @include range(s, m) {
+    left: 24rem;
+    width: calc(100% - 24rem);
+  }
+}
+
+.playerGutter {
+  height: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  max-width: 1120px;
+  width: 100%;
+
+  > * {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  @include max(s) {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+}
+
+.playerInside {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @include max(s) {
+    gap: .75rem;
+  }
 }
 
 .playerLoading {
@@ -54,15 +91,27 @@
     fill: var(--color-foreground-inverted);
     stroke: var(--color-foreground-inverted);
   }
+
+  @include max(s) {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
 .playerContent {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: .5rem;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   padding: .25rem;
   transition: opacity 200ms;
+
+  @include max(s) {
+    gap: 0;
+  }
 }
 
 .playerTitle {
@@ -70,14 +119,25 @@
   font-size: .875rem;
   line-height: 1.5;
   margin-top: .25rem;
+  overflow:  hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include min(s) {
+    margin-top: .5rem;
+    margin-left: -2px;
+  }
 }
 
 .playerControls {
   display: flex;
   align-items: center;
-  margin-top: auto;
   padding: .25rem 0;
   gap: 1.5rem;
+
+  @include max(s) {
+    gap: .75rem;
+  }
 }
 
 .playerSeekbar {
@@ -96,23 +156,35 @@
       width: .375rem;
     }
   }
+
+  @include max(s) {
+    position: absolute;
+    top: -.25rem;
+    left: 0;
+  }
 }
 
 .playerSeekbarBackground {
   width: 100%;
   height: .375rem;
   background-color: rgba(var(--color-foreground-rgb), .2);
-  border-radius: 9999px;
+
+  @include min(s) {
+    border-radius: 9999px;
+  }
 }
 
 .playerSeekbarProgress {
   position: absolute;
-  border-radius: .75rem .375rem .375rem .75rem;
   background-color: var(--color-foreground);
   opacity: .5;
   height: .375rem;
   overflow: hidden;
   pointer-events: none;
+
+  @include min(s) {
+    border-radius: .75rem .375rem .375rem .75rem;
+  }
 }
 
 .playerSeekbarPosition {
@@ -162,6 +234,10 @@
       height: 1rem;
       margin: auto;
     }
+  }
+
+  @include max(s) {
+    margin-left: auto;
   }
 }
 
