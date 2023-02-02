@@ -12,6 +12,7 @@
   --color-foreground-rgb: 15, 23, 42;
   --color-foreground-inverted: #fbfbff;
   --color-background: #f4f5f6;
+  --color-background-rgb: 244, 245, 246;
   --color-border: #d4d5d6;
 }
 
@@ -22,6 +23,7 @@
     --color-foreground-rgb: 251, 251, 255;
     --color-foreground-inverted: #0f172a;
     --color-background: #262629;
+    --color-background-rgb: 38, 38, 41;
     --color-border: #3f3f42;
   }
 }
