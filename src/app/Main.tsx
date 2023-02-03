@@ -39,7 +39,7 @@ export default function Main(props: any) {
                         }) }</time>
                         <h2 className={ styles.episodeHeading }>{ episode.title }</h2>
                         <div className={ [ styles.episodeDescriptionHolder, styles.episodeDescriptionHolderOpened ].join(' ') }></div>
-                        <EpisodeDescription contentSnippet={ episode.contentSnippet } />
+                        {/* <EpisodeDescription contentSnippet={ episode.contentSnippet } /> */}
                         <EpisodeButton episode={ episode } />
                       </div>
                     </div>
