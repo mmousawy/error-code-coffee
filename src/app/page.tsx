@@ -85,7 +85,7 @@ export default async function Home() {
           </ul>
         </div>
       </header>
-      {/* <Main rss={ rss } /> */}
+      <Main rss={ rss } />
       <footer className={ [ styles.footer, styles['hidden-from-s'] ].join(' ') }>
         <h2 className={ styles['heading-2'] }>About</h2>
         <p className={ styles.headerDescription }>

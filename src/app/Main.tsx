@@ -40,7 +40,7 @@ export default function Main(props: any) {
                         <h2 className={ styles.episodeHeading }>{ episode.title }</h2>
                         <div className={ [ styles.episodeDescriptionHolder, styles.episodeDescriptionHolderOpened ].join(' ') }></div>
                         <EpisodeDescription contentSnippet={ episode.contentSnippet } />
-                        <EpisodeButton episode={ episode } />
+                        {/* <EpisodeButton episode={ episode } /> */}
                       </div>
                     </div>
                   </div>
