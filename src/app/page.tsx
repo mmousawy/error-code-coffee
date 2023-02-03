@@ -34,6 +34,14 @@ const introText = 'In this weekly podcast, our mostly improvised conversations w
 
 export default async function Home() {
   const rss = await fetchRss();
+  rss.items.forEach(episode => {
+    const convertedDate = new Date(episode.isoDate as string);
+    episode.convertedDate = convertedDate.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  });
 
   return (
     <>

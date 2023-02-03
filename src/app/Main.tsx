@@ -32,11 +32,7 @@ export default function Main(props: any) {
                   <div className={ styles.sectionGutter }>
                     <div className={ styles.episode }>
                       <div className={ styles.episodeContent }>
-                        {/* <time className={ styles.date } dateTime={ episode.isoDate }>{ new Date(episode.isoDate).toLocaleString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        }) }</time> */}
+                        <time className={ styles.date } dateTime={ episode.isoDate }>{ episode.convertedDate }</time>
                         <h2 className={ styles.episodeHeading }>{ episode.title }</h2>
                         <div className={ [ styles.episodeDescriptionHolder, styles.episodeDescriptionHolderOpened ].join(' ') }></div>
                         <EpisodeDescription contentSnippet={ episode.contentSnippet } />
