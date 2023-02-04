@@ -20,7 +20,7 @@ import Main from './Main';
 const parser = new Parser();
 
 async function fetchRss() {
-  const response = await fetch('https://anchor.fm/s/6a811cc/podcast/rss', { next: { revalidate: 3600 } });
+  const response = await fetch('https://anchor.fm/s/6a811cc/podcast/rss', { next: { revalidate: 600 } });
 
   if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary
