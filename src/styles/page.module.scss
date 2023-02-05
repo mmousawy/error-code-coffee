@@ -354,7 +354,7 @@
   padding: 3rem 0 6.5rem;
 
   @include max(s) {
-    padding: 3rem 0 0;
+    padding: 2rem 0 0;
   }
 }
 
@@ -391,14 +391,18 @@
 }
 
 .mainHeading {
-  padding-bottom: 2rem;
+  min-height: 1.25rem;
+  margin-bottom: 2.5rem;
   font-size: 1.2rem;
   opacity: .5;
   font-weight: 500;
   font-family: var(--font-mono);
+  line-height: 1.5rem;
 
   @include max(s) {
     font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.25rem;
   }
 }
 
@@ -411,13 +415,13 @@
 
 .episodeHeading {
   margin-bottom: .8rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--color-foreground);
   line-height: 1.5;
   font-weight: 600;
 
   @include max(s) {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -445,7 +449,7 @@
 }
 
 .episodeDescriptionHolderClosed {
-  max-height: 4.1em !important;
+  max-height: 3.1em !important;
 }
 
 .episodeDescriptionHolderTooBig {
@@ -467,17 +471,11 @@
   &:hover {
     opacity: 1;
   }
-
-  @include max(s) {
-    margin-top: .7rem;
-    font-size: .75rem;
-  }
 }
 
 .episodeDescription {
   opacity: .8;
   line-height: 1.56;
-  font-size: .875rem;
   white-space: pre-line;
 
   a {
@@ -492,6 +490,9 @@
 
 .playButton {
   all: unset;
+  display: inline-flex;
+  gap: .5em;
+  height: 1.5rem;
   align-self: flex-start;
   align-items: center;
   margin-top: 1.5rem;
@@ -508,14 +509,28 @@
     }
   }
 
-  @include max(s) {
-    margin-top: 1rem;
-    font-size: .875rem;
+  &[disabled] {
+    pointer-events: none;
+  }
+}
+
+.playButtonLarge {
+  @include min(s) {
+    font-size: 1.25rem;
+  }
+}
+
+.playAnimation {
+  flex-shrink: 0;
+  width: 1.5em;
+
+  circle {
+    fill: var(--color-primary);
   }
 }
 
 .playIcon {
-  height: 10px;
+  height: .625em;
   fill: var(--color-primary);
 }
 

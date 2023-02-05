@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import styles from './page.module.scss';
+import styles from '@/styles/page.module.scss';
 
 export default function LogButton(props: any) {
   const [ showMore, setShowMore ] = useState(false);
@@ -10,21 +10,6 @@ export default function LogButton(props: any) {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
-
-  function convertToHyperlinks(text: string) {
-    const regex = /(https?:\/\/[^\s]+)/g;
-    return text.replace(regex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-  }
-
-  function cleanEpisodeDescription(snippet: string) {
-    snippet = convertToHyperlinks(snippet);
-
-    return snippet
-      .replace('\n', '\n\n')
-      .split('---')[0]
-      .replace(/\v+/g, ' ')
-      .trim();
-  }
 
   const resizeHandler = () => {
     if (!containerRef.current || !descriptionRef.current) {
@@ -62,9 +47,7 @@ export default function LogButton(props: any) {
       ].join(' ') }
       >
         <p ref={ descriptionRef } className={ styles.episodeDescription } dangerouslySetInnerHTML={
-          { __html:
-          cleanEpisodeDescription(props.contentSnippet || 'No description available.'),
-          }
+          { __html: props.contentSnippet }
         } />
 
       </div>

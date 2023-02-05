@@ -1,0 +1,131 @@
+@import 'variables';
+@import 'mixins';
+
+.main {
+  @include range(s, m) {
+    margin-left: 24rem;
+  }
+
+  @include min(m) {
+    margin-left: 28rem;
+  }
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 0 6.5rem;
+
+  @include max(s) {
+    padding: 2rem 0 0;
+  }
+}
+
+.section {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sectionGutter {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  max-width: 1120px;
+  width: 100%;
+
+  > * {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  @include max(s) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.episode {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+
+  @include max(s) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+.episodeHeading {
+  margin-bottom: 1.5rem;
+  font-size: 2.4rem;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: -.1em;
+
+  @include max(s) {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+}
+
+.episodeContent {
+  max-width: 672px;
+  display: flex;
+  flex-direction: column;
+}
+
+.episodeDescription {
+  opacity: .8;
+  line-height: 1.56;
+  white-space: pre-line;
+  margin-bottom: .5rem;
+
+  a {
+    color: var(--color-primary);
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @include min(s) {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  opacity: .5;
+  margin-bottom: 1.25rem;
+}
+
+.overviewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: .4em;
+  margin-bottom: 2.5rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-family: var(--font-mono);
+
+  svg {
+    fill: var(--color-primary);
+  }
+
+  &:hover {
+    color: var(--color-primary--400);
+
+    svg {
+      fill: var(--color-primary--400);
+    }
+  }
+
+  @include max(s) {
+    margin-bottom: 2rem;
+  }
+
+  @include min(s) {
+    font-size: 1.25rem;
+  }
+}

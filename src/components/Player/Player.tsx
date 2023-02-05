@@ -3,7 +3,7 @@
 import { useContext, useRef, useState } from 'react';
 
 // Contexts
-import { PlayerContext } from '../../PlayerContext';
+import { PlayerContext } from '@/contexts/PlayerContext';
 
 // Assets
 import IconPlay from '@/assets/svg/player/play.svg';

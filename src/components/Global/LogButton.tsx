@@ -2,6 +2,6 @@
 
 export default function LogButton(props: any) {
   return (
-    <button onClick={ () => console.log(props.rss) }>Log</button>
+    <button onClick={ () => console.log(props.data) }>Log</button>
   );
 }

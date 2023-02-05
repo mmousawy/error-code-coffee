@@ -1,5 +1,5 @@
-@import '../../variables';
-@import '../../mixins';
+@import '@/styles/variables';
+@import '@/styles/mixins';
 
 .player {
   position: fixed;
@@ -11,8 +11,8 @@
   background-color: rgba(var(--color-background-rgb), .85);
   backdrop-filter: blur(.25rem);
   border-top: 1px solid var(--color-border);
-  transition: transform 500ms;
   transform: translateY(100%);
+  transition: transform 500ms;
 
   @include max(s) {
     left: 0;

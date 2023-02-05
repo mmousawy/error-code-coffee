@@ -1,12 +1,16 @@
-import './globals.css';
 import { Inter } from '@next/font/google';
 const inter = Inter({ subsets: [ 'latin' ] });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import Header from '@/components/Global/Header';
+import Footer from '@/components/Global/Footer';
+
+import Player from '@/components/Player/Player';
+import PlayerContextProvider from '@/contexts/PlayerContext';
+
+import '@/styles/globals.css';
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+
   return (
     <html lang='en' className={ inter.className }>
       {/*
@@ -14,7 +18,14 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body>
+        <PlayerContextProvider>
+          <Header />
+          { children }
+          <Footer />
+          <Player />
+        </PlayerContextProvider>
+      </body>
     </html>
   );
 }
