@@ -1,4 +1,6 @@
+import { Analytics } from '@vercel/analytics/react';
 import { Inter } from '@next/font/google';
+
 const inter = Inter({ subsets: [ 'latin' ] });
 
 import Header from '@/components/Global/Header';
@@ -25,6 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
           <Player />
         </PlayerContextProvider>
+        <Analytics />
       </body>
     </html>
   );
