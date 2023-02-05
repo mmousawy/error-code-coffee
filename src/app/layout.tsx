@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
 import { Inter } from '@next/font/google';
 
 const inter = Inter({ subsets: [ 'latin' ] });
@@ -8,6 +7,7 @@ import Footer from '@/components/Global/Footer';
 
 import Player from '@/components/Player/Player';
 import PlayerContextProvider from '@/contexts/PlayerContext';
+import AnalyticsWrapper from '@/components/Global/AnalyticsWrapper';
 
 import '@/styles/globals.css';
 
@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
           <Player />
         </PlayerContextProvider>
-        <Analytics />
+        <AnalyticsWrapper />
       </body>
     </html>
   );
