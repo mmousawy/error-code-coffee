@@ -9,7 +9,7 @@ import Player from '@/components/Player/Player';
 import PlayerContextProvider from '@/contexts/PlayerContext';
 import AnalyticsWrapper from '@/components/Global/AnalyticsWrapper';
 
-import '@/styles/globals.css';
+import '@/styles/globals.scss';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 
