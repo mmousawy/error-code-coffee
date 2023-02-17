@@ -13,7 +13,16 @@ export default function EpisodeButton(props: any) {
   const [ theme, setTheme ] = useState<string|null>(null);
 
   useEffect(() => {
-    setTheme(localStorage.getItem('theme'));
+    const storedTheme = localStorage.getItem('theme');
+    setTheme(storedTheme);
+
+    if (!storedTheme) {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    }
   }, []);
 
   useEffect(() => {

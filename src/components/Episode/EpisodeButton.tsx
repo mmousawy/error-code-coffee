@@ -16,6 +16,10 @@ export default function EpisodeButton(props: any) {
   const playerContext = useContext(PlayerContext);
   const episode = props.episode;
 
+  const timeToMin = (time: string) => {
+    return `${ time.split(':')[0] } min`;
+  };
+
   return (
     <>
       <button
@@ -29,7 +33,7 @@ export default function EpisodeButton(props: any) {
       >
         { (playerContext?.episode?.slug === episode.slug)
           ? <><IconPlayingAnimation className={ styles.playAnimation } aria-hidden='true' /> <span aria-hidden='true'>Playing</span></>
-          : <><IconPlay className={ styles.playIcon } aria-hidden='true' /> <span aria-hidden='true'>Listen [{  props.episode.itunes.duration }]</span></>
+          : <><IconPlay className={ styles.playIcon } aria-hidden='true' /> <span aria-hidden='true'>Listen ({ timeToMin(props.episode.itunes.duration) })</span></>
         }
       </button>
     </>
