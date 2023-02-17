@@ -10,7 +10,11 @@ import IconLightMode from '@/assets/svg/light-mode.svg';
 import styles from './ThemeSwitcher.module.scss';
 
 export default function EpisodeButton(props: any) {
-  const [ theme, setTheme ] = useState(localStorage.getItem('theme'));
+  const [ theme, setTheme ] = useState<string|null>(null);
+
+  if (typeof window !== 'undefined') {
+    setTheme(localStorage.getItem('theme'));
+  }
 
   useEffect(() => {
     document.documentElement.classList.remove('dark', 'light');
