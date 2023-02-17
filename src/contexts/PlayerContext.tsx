@@ -63,18 +63,18 @@ export default function PlayerContextProvider({ children }: { children: any }) {
   //   console.log(loading ? 'Loading' : 'Done');
   // }, [ loading ]);
 
-  const load = (episode: any) => {
+  const load = (newEpisode: any) => {
     if (!audio) {
       return;
     }
 
-    setEpisode(episode);
+    setEpisode(newEpisode);
     setLoading(true);
     setProgress(0);
     audio.pause();
 
     setTimeout(() => {
-      audio.src = episode.enclosure.url;
+      audio.src = newEpisode.enclosure.url;
       audio.load();
       audio.playbackRate = playbackSpeed;
       audio.play();

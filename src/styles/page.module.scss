@@ -339,6 +339,8 @@
 }
 
 .main {
+  background-color: var(--color-body-background);
+
   @include range(s, m) {
     margin-left: 24rem;
   }
@@ -486,52 +488,6 @@
       text-decoration: underline;
     }
   }
-}
-
-.playButton {
-  all: unset;
-  display: inline-flex;
-  gap: .5em;
-  height: 1.5rem;
-  align-self: flex-start;
-  align-items: center;
-  margin-top: 1.5rem;
-  cursor: pointer;
-  font-weight: 700;
-  font-family: var(--font-mono);
-  color: var(--color-primary);
-
-  &:hover {
-    color: var(--color-primary--400);
-
-    .playIcon {
-      fill: var(--color-primary--400);
-    }
-  }
-
-  &[disabled] {
-    pointer-events: none;
-  }
-}
-
-.playButtonLarge {
-  @include min(s) {
-    font-size: 1.25rem;
-  }
-}
-
-.playAnimation {
-  flex-shrink: 0;
-  width: 1.5em;
-
-  circle {
-    fill: var(--color-primary);
-  }
-}
-
-.playIcon {
-  height: .625em;
-  fill: var(--color-primary);
 }
 
 .footer {

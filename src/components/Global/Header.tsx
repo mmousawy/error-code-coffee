@@ -1,3 +1,6 @@
+// Components
+import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher';
+
 // Assets
 import ImageHeaderBackground from '@/assets/svg/header-background.svg';
 
@@ -65,6 +68,7 @@ export default function Header() {
           </li>
         </ul>
       </div>
+      <ThemeSwitcher />
     </header>
   );
 }
