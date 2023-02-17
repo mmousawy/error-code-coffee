@@ -12,9 +12,9 @@ import styles from './ThemeSwitcher.module.scss';
 export default function EpisodeButton(props: any) {
   const [ theme, setTheme ] = useState<string|null>(null);
 
-  if (typeof window !== 'undefined') {
+  useEffect(() => {
     setTheme(localStorage.getItem('theme'));
-  }
+  }, []);
 
   useEffect(() => {
     document.documentElement.classList.remove('dark', 'light');
