@@ -10,7 +10,7 @@ import IconPlay from '@/assets/svg/play.svg';
 import IconPlayingAnimation from '@/assets/svg/playing-animation.svg';
 
 // Styles
-import styles from '@/styles/page.module.scss';
+import styles from './EpisodeButton.module.scss';
 
 export default function EpisodeButton(props: any) {
   const playerContext = useContext(PlayerContext);

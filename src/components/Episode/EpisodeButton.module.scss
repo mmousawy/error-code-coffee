@@ -1,0 +1,51 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.playButton {
+  all: unset;
+  display: inline-flex;
+  gap: .5em;
+  height: 1.5rem;
+  align-self: flex-start;
+  align-items: center;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  padding: .4rem .6rem .4rem .8rem;
+  text-shadow: 0 1px rgba(0,0,0,.3);
+  transition: background-color 200ms;
+
+  &:hover {
+    background-color: var(--color-primary--400);
+  }
+
+  &[disabled] {
+    pointer-events: none;
+    background-color: var(--color-primary--400);
+  }
+}
+
+.playButtonLarge {
+  @include min(s) {
+    font-size: 1.25rem;
+  }
+}
+
+.playAnimation {
+  flex-shrink: 0;
+  width: 1.5em;
+  filter: drop-shadow(0 1px rgba(0,0,0,.3));
+
+  circle {
+    fill: var(--color-white);
+  }
+}
+
+.playIcon {
+  height: .625em;
+  fill: var(--color-white);
+  filter: drop-shadow(0 1px rgba(0,0,0,.3));
+}
