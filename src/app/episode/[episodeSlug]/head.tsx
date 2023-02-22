@@ -7,13 +7,15 @@ export default async function Head({ params }: { params: any }) {
   const episodes = await getEpisodes();
   const episode = getEpisodeBySlug(episodes, params.episodeSlug);
 
-  if (!episode?.title) {
+  if (!episode?.title || typeof episode.title !== 'string') {
     notFound();
   }
 
+  const title = `${ episode.title } - Error Code: Coffee`;
+
   return (
     <>
-      <title>{ episode.title } - Error Code: Coffee</title>
+      <title>{ title }</title>
     </>
   );
 }
