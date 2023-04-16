@@ -17,7 +17,12 @@ export default function EpisodeButton(props: any) {
   const episode = props.episode;
 
   const timeToMin = (time: string) => {
-    return `${ time.split(':')[0] } min`;
+    const timeSplit = time.split(':');
+    if (timeSplit.length > 2) {
+      return `${ parseInt(timeSplit[0]) } hr ${ parseInt(timeSplit[1]) } min`;
+    } else {
+      return `${ parseInt(timeSplit[0]) } min`;
+    }
   };
 
   return (
