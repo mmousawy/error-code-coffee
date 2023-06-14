@@ -7,8 +7,6 @@ import getEpisodes, { getEpisodeBySlug } from '@/shared/episodeData';
 import EpisodeSingle from '@/components/Episode/EpisodeSingle';
 
 export async function generateMetadata({ params }: { params: any }) {
-  console.log(params);
-
   const episodes = await getEpisodes();
   const episode = getEpisodeBySlug(episodes, params.episodeSlug);
 
