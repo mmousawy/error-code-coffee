@@ -11,6 +11,11 @@ import AnalyticsWrapper from '@/components/Global/AnalyticsWrapper';
 
 import '@/styles/globals.scss';
 
+export const metadata = {
+  title: 'Error Code: Coffee - A geeky podcast about tech, web dev and all things life',
+  description: 'A weekly podcast about tech, web development and all things life! Hosted by Gideon Heilbron & Murtada al Mousawy.',
+};
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (

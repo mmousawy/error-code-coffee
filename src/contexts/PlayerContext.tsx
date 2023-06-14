@@ -74,7 +74,7 @@ export default function PlayerContextProvider({ children }: { children: any }) {
     audio.pause();
 
     setTimeout(() => {
-      audio.src = newEpisode.enclosure.url;
+      audio.src = newEpisode.url;
       audio.load();
       audio.playbackRate = playbackSpeed;
       audio.play();

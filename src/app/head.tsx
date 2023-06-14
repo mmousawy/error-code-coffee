@@ -4,10 +4,6 @@ export default function Head() {
 
   return (
     <>
-      <title>{ title }</title>
-      <meta content='width=device-width, initial-scale=1' name='viewport' />
-      <meta name='description' content={ description } />
-
       <meta property='og:title' content={ title }  />
       <meta property='og:description' content={ description } />
       <meta property='og:image' content='/og-image.png' />

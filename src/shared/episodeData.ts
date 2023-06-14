@@ -36,6 +36,9 @@ export default async function getEpisodes() {
     episode.itunes.duration = episode.itunes.duration.replace(/^00:/, '');
     episode.contentSnippet = cleanEpisodeDescription(episode.contentSnippet || 'No description available.');
 
+    episode.url = episode.enclosure.url;
+    delete episode.enclosure;
+
     const convertedDate = new Date(episode.isoDate as string);
     episode.convertedDate = convertedDate.toLocaleString('en-US', {
       year: 'numeric',
