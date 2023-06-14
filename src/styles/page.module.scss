@@ -452,7 +452,7 @@
 
 .episodeDescriptionHolder {
   position: relative;
-  transition: max-height 400ms ease-in-out;
+  transition: max-height 300ms ease-in-out;
   overflow: hidden;
 
   &::after {
@@ -460,20 +460,22 @@
     background: linear-gradient(to bottom, transparent, var(--color-body-background));
     width: 100%;
     position: absolute;
-    height: 2em;
+    height: 0;
     bottom: 0;
-    opacity: 0;
-    transition: opacity 400ms;
+    transition: height 200ms;
+    transition-delay: 100ms;
   }
 }
 
 .episodeDescriptionHolderClosed {
-  max-height: 3.1em !important;
+  max-height: 5.2em !important;
 }
 
 .episodeDescriptionHolderTooBig {
   &::after {
     opacity: 1;
+    height: 2em;
+    transition-delay: 0ms;
   }
 }
 
@@ -494,7 +496,7 @@
 
 .episodeDescription {
   opacity: .8;
-  line-height: 1.56;
+  line-height: 1.3;
   white-space: pre-line;
 
   a {
