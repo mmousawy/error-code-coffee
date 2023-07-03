@@ -10,10 +10,24 @@ import PlayerContextProvider from '@/contexts/PlayerContext';
 import AnalyticsWrapper from '@/components/Global/AnalyticsWrapper';
 
 import '@/styles/globals.scss';
+import { Metadata } from 'next';
 
-export const metadata = {
+const meta = {
   title: 'Error Code: Coffee - A geeky podcast about tech, web dev and all things life',
   description: 'A weekly podcast about tech, web development and all things life! Hosted by Gideon Heilbron & Murtada al Mousawy.',
+  image: '/og-image.png',
+};
+
+export const metadata: Metadata = {
+  title: meta.title,
+  description: meta.description,
+  themeColor: '#ffffff',
+  manifest: '/site.webmanifest',
+  openGraph: {
+    title: meta.title,
+    description: meta.description,
+    images: [ meta.image ],
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
