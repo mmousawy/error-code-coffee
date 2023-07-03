@@ -34,11 +34,11 @@ export default function EpisodeOverview(props: any) {
                 <div className={ styles.episode }>
                   <div className={ styles.episodeContent }>
                     <time className={ styles.date } dateTime={ episode.isoDate }>{ episode.convertedDate }</time>
-                    <h3 className={ styles.episodeHeading }>
+                    <h2 className={ styles.episodeHeading }>
                       <Link href={ `/episode/${ episode.slug }` }>
                         { episode.title }
                       </Link>
-                    </h3>
+                    </h2>
                     <div className={ [ styles.episodeDescriptionHolder, styles.episodeDescriptionHolderOpened ].join(' ') }></div>
                     <EpisodeDescription content={ episode.contentCompact } />
                     <EpisodeButton episode={ episode } />
@@ -67,7 +67,7 @@ export default function EpisodeOverview(props: any) {
         { renderEpisodes() }
 
         { episodesCount > episodesPerPage * page && (
-          <button className={ styles.loadMoreButton } onClick={ () => setPage(page + 1) }>Load more episodes</button>
+          <button className={ styles.loadMoreButton } onClick={ () => setPage(page + 1) }>More episodes</button>
         ) }
 
       </div>

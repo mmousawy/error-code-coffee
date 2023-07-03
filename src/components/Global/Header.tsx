@@ -33,7 +33,7 @@ export default function Header() {
         <a href='/' aria-label='Homepage' className={ styles.headerLogo }>
           <LogoEcc />
         </a>
-        <p className={ styles.headerSubContent }><span>A podcast by</span> <a href='https://cursief.co'><LogoCursief className={ styles.headerSubContentLogo } /></a></p>
+        <p className={ styles.headerSubContent }><span>A podcast by</span> <a href='https://cursief.co' aria-label='Visit the Cursief homepage'><LogoCursief className={ styles.headerSubContentLogo } /></a></p>
 
         <p className={ styles['heading-1'] }>Error Code: Coffee</p>
 
