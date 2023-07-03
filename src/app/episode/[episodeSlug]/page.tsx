@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: any }) {
   const meta = {
     title: `${ episode.title } - Error Code: Coffee`,
     description: episode.excerpt,
-    image: `/og?title=${ episode.title }`,
+    image: `/og?title=${ encodeURIComponent(episode.title) }`,
   };
 
   return {
