@@ -47,22 +47,22 @@ export default function Header() {
         <p className={ [ styles['heading-2'], styles['hidden-to-s' ] ].join(' ') }>Listen</p>
         <ul className={ styles.servicesList }>
           <li>
-            <a href='https://open.spotify.com/show/3I9fjgZMOJU5dsvtRzfh3L' target='_blank' rel='noopener noreferrer'>
+            <a href='https://open.spotify.com/show/3I9fjgZMOJU5dsvtRzfh3L' target='_blank' rel='noopener noreferrer' aria-label='Listen to Error Code: Coffee on Spotify'>
               <span className={ styles.serviceIcon }><IconSpotify /></span><span className={ styles.serviceName }> Spotify</span>
             </a>
           </li>
           <li>
-            <a href='https://itunes.apple.com/nl/podcast/error-code-coffee/id1433981170' target='_blank' rel='noopener noreferrer'>
+            <a href='https://itunes.apple.com/nl/podcast/error-code-coffee/id1433981170' target='_blank' rel='noopener noreferrer' aria-label='Listen to Error Code: Coffee on Apple Podcasts'>
               <span className={ styles.serviceIcon }><IconApplePodcasts /></span><span className={ styles.serviceName }> Apple Podcasts</span>
             </a>
           </li>
           <li>
-            <a href='https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy82YTgxMWNjL3BvZGNhc3QvcnNz' target='_blank' rel='noopener noreferrer'>
+            <a href='https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy82YTgxMWNjL3BvZGNhc3QvcnNz' target='_blank' rel='noopener noreferrer' aria-label='Listen to Error Code: Coffee on Google Podcasts'>
               <span className={ styles.serviceIcon }><IconGooglePodcasts /></span><span className={ styles.serviceName }> Google Podcasts</span>
             </a>
           </li>
           <li>
-            <a href='https://anchor.fm/s/6a811cc/podcast/rss' target='_blank' rel='noopener noreferrer'>
+            <a href='https://anchor.fm/s/6a811cc/podcast/rss' target='_blank' rel='noopener noreferrer' aria-label='Go to the RSS feed of Error Code: Coffee'>
               <span className={ styles.serviceIcon }><IconRSS /></span><span className={ styles.serviceName }> RSS feed</span>
             </a>
           </li>
