@@ -17,6 +17,10 @@ export default function EpisodeOverview(props: any) {
     const renderedEpisodes = props.episodes.items.map((episode: any) => {
       let renderSeasonHeading = false;
 
+      if (process.env.NODE_ENV === 'development') {
+        console.log(episode);
+      }
+
       // Check if the current episode season hasn't been passed yet
       if (currentSeason !== episode.itunes.season) {
         currentSeason = episode.itunes.season;
@@ -39,11 +43,13 @@ export default function EpisodeOverview(props: any) {
                 <div className={ styles.episode }>
                   <div className={ styles.episodeContent }>
                     <time className={ styles.date } dateTime={ episode.isoDate }>{ episode.convertedDate }</time>
-                    <Link href={ `/episode/${ episode.slug }` }>
-                      <h3 className={ styles.episodeHeading }>{ episode.title }</h3>
-                    </Link>
+                    <h3 className={ styles.episodeHeading }>
+                      <Link href={ `/episode/${ episode.slug }` }>
+                        { episode.title }
+                      </Link>
+                    </h3>
                     <div className={ [ styles.episodeDescriptionHolder, styles.episodeDescriptionHolderOpened ].join(' ') }></div>
-                    <EpisodeDescription contentSnippet={ episode.contentSnippet } />
+                    <EpisodeDescription content={ episode.contentCompact } />
                     <EpisodeButton episode={ episode } />
                   </div>
                 </div>

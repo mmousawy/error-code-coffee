@@ -7,6 +7,7 @@ import styles from '@/styles/page.module.scss';
 export default function LogButton(props: any) {
   const [ showMore, setShowMore ] = useState(false);
   const [ isTooBig, setIsTooBig ] = useState(true);
+  const [ containerHeight, setContainerHeight ] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
@@ -16,11 +17,11 @@ export default function LogButton(props: any) {
       return;
     }
 
-    if (containerRef.current?.clientHeight < descriptionRef.current.clientHeight) {
+    if (80 < descriptionRef.current.clientHeight) {
       setIsTooBig(true);
       containerRef.current.setAttribute('style', `max-height: ${ descriptionRef.current.clientHeight }px`);
 
-    } else {
+    } else if (!showMore) {
       setIsTooBig(false);
     }
   };
@@ -46,14 +47,14 @@ export default function LogButton(props: any) {
         isTooBig && !showMore ? styles.episodeDescriptionHolderTooBig : '',
       ].join(' ') }
       >
-        <p ref={ descriptionRef } className={ styles.episodeDescription } dangerouslySetInnerHTML={
-          { __html: props.contentSnippet }
+        <div ref={ descriptionRef } className={ styles.episodeDescription } dangerouslySetInnerHTML={
+          { __html: props.content }
         } />
 
       </div>
       { isTooBig && (
         <button className={ styles.showMoreButton } onClick={ () => setShowMore(!showMore) }>
-          { !showMore ? 'Show more' : 'Show less'}
+          { !showMore ? '+ Show more' : '- Show less'}
         </button>
       ) }
     </>

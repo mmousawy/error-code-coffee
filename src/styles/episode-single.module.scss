@@ -75,8 +75,25 @@
 .episodeDescription {
   opacity: .8;
   line-height: 1.56;
-  white-space: pre-line;
   margin-bottom: .5rem;
+
+  p {
+    + p,
+    + ul {
+      margin-top: 1em;
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  hr {
+    height: 1px;
+    border: 0;
+    background-color: var(--color-border);
+    margin: 1em 0;
+  }
 
   a {
     color: var(--color-primary);
@@ -87,9 +104,12 @@
     }
   }
 
-  @include min(s) {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+  ul {
+    list-style: disc;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding-left: 2em;
   }
 }
 

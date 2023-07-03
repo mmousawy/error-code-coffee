@@ -24,7 +24,7 @@ export default function EpisodeSingle(props: any) {
                 <div className={ styles.episodeContent }>
                   <time className={ styles.date } dateTime={ episode.isoDate }>{ episode.convertedDate }</time>
                   <h1 className={ styles.episodeHeading }>{ episode.title }</h1>
-                  <div className={ styles.episodeDescription } dangerouslySetInnerHTML={ { __html: episode.contentSnippet } } />
+                  <div className={ styles.episodeDescription } dangerouslySetInnerHTML={ { __html: episode.content } } />
                   <EpisodeButton episode={ episode } large={ true } />
                 </div>
               </div>

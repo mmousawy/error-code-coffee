@@ -6,18 +6,25 @@ import { slugify } from '@/utils';
 const parser = new Parser();
 
 function convertToHyperlinks(text: string) {
-  const regex = /(https?:\/\/[^\s]+)/g;
+  const regex = /(?!<a[^>]*>[^<])(((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?))(?![^<]*<\/a>)/gi;
   return text.replace(regex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
 }
 
-function cleanEpisodeDescription(snippet: string) {
+function cleanEpisodeDescription(snippet: string, options: { compact?: boolean } = {}) {
   snippet = convertToHyperlinks(snippet);
 
-  return snippet
-    .replace('\n', '\n\n')
-    .split('---')[0]
+  snippet = snippet
+    .replace('--------------------', '<hr>')
+    .replace('---', '<hr>')
     .replace(/\v+/g, ' ')
+    .replace(/<p><\/p>/g, '')
     .trim();
+
+  if (options.compact) {
+    snippet = snippet.split('<hr>')[0];
+  }
+
+  return snippet;
 }
 
 export default async function getEpisodes() {
@@ -34,7 +41,10 @@ export default async function getEpisodes() {
     episode.slug = slugify(episode.title);
 
     episode.itunes.duration = episode.itunes.duration.replace(/^00:/, '');
-    episode.contentSnippet = cleanEpisodeDescription(episode.contentSnippet || 'No description available.');
+    episode.content = cleanEpisodeDescription(episode.content || 'No description available.');
+    episode.contentCompact = cleanEpisodeDescription(episode.content || 'No description available.', {
+      compact: true,
+    });
 
     episode.url = episode.enclosure.url;
     delete episode.enclosure;
