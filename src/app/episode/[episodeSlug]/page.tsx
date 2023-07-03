@@ -14,9 +14,20 @@ export async function generateMetadata({ params }: { params: any }) {
     notFound();
   }
 
-  return {
+  const meta = {
     title: `${ episode.title } - Error Code: Coffee`,
     description: episode.description,
+    image: `/og?title=${ episode.title }`,
+  };
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      images: [ meta.image ],
+    },
   };
 }
 
@@ -27,8 +38,6 @@ export default async function EpisodeSlug({ params }: { params: any }) {
   if (!episode?.title) {
     notFound();
   }
-
-  const title = `${ episode.title } - Error Code: Coffee`;
 
   return (
     <>
