@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 
 // Components
 import EpisodeDescription from './EpisodeDescription';
@@ -11,32 +11,23 @@ import styles from '@/styles/page.module.scss';
 import Link from 'next/link';
 
 export default function EpisodeOverview(props: any) {
-  let currentSeason: string;
+  const episodesPerPage = 10;
+  const [ page, setPage ] = React.useState(1);
+  const episodesCount = props.episodes.items.length;
 
-  const renderEpisodes = () => {
-    const renderedEpisodes = props.episodes.items.map((episode: any) => {
-      let renderSeasonHeading = false;
+  if (process.env.NODE_ENV === 'development') {
+    console.log(props.episodes.items);
+  }
 
-      if (process.env.NODE_ENV === 'development') {
-        console.log(episode);
-      }
+  const renderEpisodes = useCallback(() => {
+    const renderedEpisodes = props.episodes.items.map((episode: any, episodeIndex: number) => {
 
-      // Check if the current episode season hasn't been passed yet
-      if (currentSeason !== episode.itunes.season) {
-        currentSeason = episode.itunes.season;
-
-        renderSeasonHeading = true;
+      if (episodeIndex >= episodesPerPage * page) {
+        return;
       }
 
       return (
         <React.Fragment key={ episode.guid }>
-          { renderSeasonHeading && (
-            <div className={ [ styles.section, styles['section--heading'] ].join(' ') }>
-              <div className={ styles.sectionGutter }>
-                <h2 className={ styles.seasonHeading }>Season { currentSeason }</h2>
-              </div>
-            </div>
-          ) }
           { episode.isoDate && (
             <div className={ styles.section }>
               <div className={ styles.sectionGutter }>
@@ -61,7 +52,7 @@ export default function EpisodeOverview(props: any) {
     });
 
     return renderedEpisodes;
-  };
+  }, [ props.episodes, page ]);
 
   return (
     <main className={ styles.main }>
@@ -74,6 +65,10 @@ export default function EpisodeOverview(props: any) {
         </div>
 
         { renderEpisodes() }
+
+        { episodesCount > episodesPerPage * page && (
+          <button className={ styles.loadMoreButton } onClick={ () => setPage(page + 1) }>Load more episodes</button>
+        ) }
 
       </div>
     </main>

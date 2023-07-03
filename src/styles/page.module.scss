@@ -520,7 +520,7 @@
   }
 
   ul {
-    list-style: disc;
+    list-style: square;
     display: flex;
     flex-direction: column;
     gap: .5em;
@@ -555,5 +555,36 @@
 .hidden-from-s {
   @include min(s) {
     display: none;
+  }
+}
+
+.loadMoreButton {
+  all: unset;
+  display: inline-flex;
+  gap: .625em;
+  height: 1.5rem;
+  align-self: flex-start;
+  align-items: center;
+  margin: 1.5rem auto;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  padding: .4rem .6rem .4rem .8rem;
+  text-shadow: 0 1px rgba(0,0,0,.3);
+  transition: background-color 200ms;
+
+  &:hover {
+    background-color: var(--color-primary--400);
+  }
+
+  &[disabled] {
+    pointer-events: none;
+    background-color: var(--color-primary--400);
+  }
+
+  @include min(s) {
+    font-size: 1.25rem;
   }
 }
