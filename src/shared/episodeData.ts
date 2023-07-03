@@ -46,6 +46,11 @@ export default async function getEpisodes() {
       compact: true,
     });
 
+    episode.excerpt = episode.contentSnippet.replace(/Watch this episode on YouTube.+/g, '');
+    episode.excerpt = episode.excerpt.replace(/\r?\n|\r/g, '');
+
+    episode.excerpt = episode.excerpt.length > 200 ? episode.excerpt.substr(0, 197) + '...' : episode.excerpt;
+
     episode.url = episode.enclosure.url;
     delete episode.enclosure;
 

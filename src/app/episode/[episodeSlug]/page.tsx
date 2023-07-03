@@ -14,9 +14,13 @@ export async function generateMetadata({ params }: { params: any }) {
     notFound();
   }
 
+  if (process.env.NODE_ENV === 'development') {
+    console.log(episode);
+  }
+
   const meta = {
     title: `${ episode.title } - Error Code: Coffee`,
-    description: episode.description,
+    description: episode.excerpt,
     image: `/og?title=${ episode.title }`,
   };
 
