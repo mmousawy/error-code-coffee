@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const PlayerContext = createContext<any>(null);
 
@@ -10,7 +10,7 @@ export default function PlayerContextProvider({ children }: { children: any }) {
   const [ loading, setLoading ] = useState(false);
   const [ paused, setPaused ] = useState(false);
   const [ progress, setProgress ] = useState(0);
-  const [ playbackSpeed, setPlaybackSpeed ] = useState(1);
+  const [ playbackSpeed, setPlaybackSpeed ] = useState<unknown>(1);
   const [ newProgress, setNewProgress ] = useState(-1);
   const [ requestUpdateProgress, setRequestUpdateProgress ] = useState(false);
   const [ duration, setDuration ] = useState(0);
@@ -76,7 +76,7 @@ export default function PlayerContextProvider({ children }: { children: any }) {
     setTimeout(() => {
       audio.src = newEpisode.url;
       audio.load();
-      audio.playbackRate = playbackSpeed;
+      audio.playbackRate = playbackSpeed as number;
       audio.play();
     }, 10);
   };
@@ -98,10 +98,6 @@ export default function PlayerContextProvider({ children }: { children: any }) {
     event.stopPropagation();
   };
 
-  const togglePlaybackSpeed = () => {
-    setPlaybackSpeed(playbackSpeed === 2 ? 1 : playbackSpeed + .5);
-  };
-
   useEffect(() => {
     if (!audio || !requestUpdateProgress || newProgress === -1) {
       return;
@@ -118,8 +114,7 @@ export default function PlayerContextProvider({ children }: { children: any }) {
       return;
     }
 
-    audio.playbackRate = playbackSpeed;
-
+    audio.playbackRate = parseFloat(playbackSpeed as string);
   }, [ audio, playbackSpeed ]);
 
   const state = {
@@ -134,7 +129,7 @@ export default function PlayerContextProvider({ children }: { children: any }) {
     updateProgressVisual,
     setRequestUpdateProgress,
     playbackSpeed,
-    togglePlaybackSpeed,
+    setPlaybackSpeed,
   };
 
   return (

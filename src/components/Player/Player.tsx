@@ -1,6 +1,7 @@
 'use client';
 
 import { useContext, useRef, useState } from 'react';
+import Select from 'react-select';
 
 // Contexts
 import { PlayerContext } from '@/contexts/PlayerContext';
@@ -9,9 +10,6 @@ import { PlayerContext } from '@/contexts/PlayerContext';
 import IconPlay from '@/assets/svg/player/play.svg';
 import IconPause from '@/assets/svg/player/pause.svg';
 import IconLoading from '@/assets/svg/player/loading.svg';
-import IconSpeedOne from '@/assets/svg/player/speed-1.svg';
-import IconSpeedOnePointFive from '@/assets/svg/player/speed-1.5.svg';
-import IconSpeedTwo from '@/assets/svg/player/speed-2.svg';
 
 import styles from './Player.module.scss';
 
@@ -63,6 +61,24 @@ export default function Player() {
     ? (playerContext.newProgress / playerContext.duration) * 100
     : (playerContext.progress / playerContext.duration) * 100;
 
+  function renderPlaybackSpeedOptions() {
+    const min = 0.5;
+    const max = 2;
+
+    const options = [];
+
+    for (let i = min; i <= max; i += 0.1) {
+      // Round to 1 decimal place (fixes JS rounding errors)
+      i = Math.round(i * 10) / 10;
+      options.push({
+        value: i,
+        label: `${ i }×`,
+      });
+    }
+
+    return options;
+  }
+
   return (
     <>
       <div
@@ -70,6 +86,7 @@ export default function Player() {
           styles.player,
           playerContext.loading ? styles.playerLoading : '',
           playerContext.episode ? styles.playerVisible : '',
+          // styles.playerVisible
         ].join(' ') }
       >
         <div className={ styles.playerGutter }>
@@ -102,17 +119,66 @@ export default function Player() {
                   <span>{ formatTime(playerContext.newProgress !== -1 ? playerContext.newProgress : playerContext.progress) }</span> / <span>{ formatTime(playerContext.duration) }</span>
                 </div>
                 <div className={ styles.playerPlaybackSpeed }>
-                  <button onClick={ playerContext.togglePlaybackSpeed } aria-label='Toggle plaback rate'>
-                    { playerContext.playbackSpeed === 1 && (
-                      <IconSpeedOne className={ styles.playerPlaybackSpeedIcon } aria-hidden />
-                    ) }
-                    { playerContext.playbackSpeed === 1.5 && (
-                      <IconSpeedOnePointFive className={ styles.playerPlaybackSpeedIcon } aria-hidden />
-                    ) }
-                    { playerContext.playbackSpeed === 2 && (
-                      <IconSpeedTwo className={ styles.playerPlaybackSpeedIcon } aria-hidden />
-                    ) }
-                  </button>
+                  <Select
+                    options={ renderPlaybackSpeedOptions() }
+                    value={ { value: playerContext.playbackSpeed, label: `${ playerContext.playbackSpeed }x` } }
+                    onChange={ (e) => { playerContext.setPlaybackSpeed(e?.value); } }
+                    menuPlacement='top'
+                    isSearchable={ false }
+                    styles={ {
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        fontSize: '.875rem',
+                        color: 'inherit',
+                        opacity: .8,
+                        fontFamily: 'var(--font-mono)',
+                        minHeight: 'unset',
+                        borderRadius: '.25rem',
+                        padding: '.25rem .4rem .25rem .5rem',
+                        '&:hover': {
+                          backgroundColor: 'rgba(var(--color-foreground-rgb), .1)',
+                        },
+                        cursor: 'pointer',
+                      }),
+                      indicatorsContainer: (baseStyles, state) => ({
+                        ...baseStyles,
+                        marginLeft: '.25rem',
+                        'svg': {
+                          width: '1rem',
+                          height: '1rem',
+                        },
+                      }),
+                      menu: (baseStyles, state) => ({
+                        ...baseStyles,
+                        backgroundColor: 'var(--color-background)',
+                        borderRadius: '.25rem',
+                        overflow: 'hidden',
+                        width: 'auto',
+                        boxShadow: '1px 2px 10px 1px rgba(0, 0, 0, .1)',
+                        border: '1px solid var(--color-border)',
+                        scrollbarWidth: 'thin',
+                      }),
+                      menuList: (baseStyles, state) => ({
+                        ...baseStyles,
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '.875rem',
+                      }),
+                      option: (baseStyles, state) => ({
+                        ...baseStyles,
+                        padding: '.2rem .4rem',
+                        color: state.isSelected
+                          ? 'var(--color-background)'
+                          : 'var(--color-foreground)',
+                        backgroundColor: state.isSelected
+                          ? 'rgba(var(--color-foreground-rgb), .6)'
+                          : 'var(--color-background)',
+                        '&:hover': {
+                          backgroundColor: !state.isSelected && 'rgba(var(--color-foreground-rgb), .1)' || '',
+                        },
+                      }),
+                    } }
+                    unstyled
+                  />
                 </div>
               </div>
             </div>
