@@ -1,10 +1,8 @@
-import Link from 'next/link';
 
 // Styles
 import styles from '@/styles/episode-single.module.scss';
 import EpisodeButton from '@/components/Episode/EpisodeButton';
-
-import IconArrowBack from '@/assets/svg/arrow-back.svg';
+import EpisodeBackButton from './EpisodeBackButton';
 
 export default function EpisodeSingle(props: any) {
   const episode = props.episode;
@@ -15,7 +13,9 @@ export default function EpisodeSingle(props: any) {
         <div className={ styles.mainContainer }>
           <div className={ styles.section }>
             <div className={ styles.sectionGutter }>
-              <div><Link href='/' className={ styles.overviewLink }><IconArrowBack /> Back to all episodes</Link></div>
+              <div>
+                <EpisodeBackButton />
+              </div>
             </div>
           </div>
           <div className={ styles.section }>

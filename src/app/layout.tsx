@@ -7,6 +7,7 @@ import Footer from '@/components/Global/Footer';
 
 import Player from '@/components/Player/Player';
 import PlayerContextProvider from '@/contexts/PlayerContext';
+import OverviewContextProvider from '@/contexts/OverviewContext';
 import AnalyticsWrapper from '@/components/Global/AnalyticsWrapper';
 
 import '@/styles/globals.scss';
@@ -42,7 +43,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <PlayerContextProvider>
           <Header />
-          { children }
+          <OverviewContextProvider>
+            { children }
+          </OverviewContextProvider>
           <Footer />
           <Player />
         </PlayerContextProvider>

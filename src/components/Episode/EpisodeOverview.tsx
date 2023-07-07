@@ -1,6 +1,9 @@
 'use client';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
+
+// Contexts
+import { OverviewContext } from '@/contexts/OverviewContext';
 
 // Components
 import EpisodeDescription from './EpisodeDescription';
@@ -11,18 +14,22 @@ import styles from '@/styles/page.module.scss';
 import Link from 'next/link';
 
 export default function EpisodeOverview(props: any) {
+  const overviewContext = useContext(OverviewContext);
   const episodesPerPage = 10;
-  const [ page, setPage ] = React.useState(1);
   const episodesCount = props.episodes.items.length;
 
   if (process.env.NODE_ENV === 'development') {
     console.log(props.episodes.items);
   }
 
+  useEffect(() => {
+    overviewContext.setStartedOnOverview(true);
+  }, []);
+
   const renderEpisodes = useCallback(() => {
     const renderedEpisodes = props.episodes.items.map((episode: any, episodeIndex: number) => {
 
-      if (episodeIndex >= episodesPerPage * page) {
+      if (episodeIndex >= episodesPerPage * overviewContext.page) {
         return;
       }
 
@@ -52,7 +59,7 @@ export default function EpisodeOverview(props: any) {
     });
 
     return renderedEpisodes;
-  }, [ props.episodes, page ]);
+  }, [ props.episodes, overviewContext.page ]);
 
   return (
     <main className={ styles.main }>
@@ -66,8 +73,8 @@ export default function EpisodeOverview(props: any) {
 
         { renderEpisodes() }
 
-        { episodesCount > episodesPerPage * page && (
-          <button className={ styles.loadMoreButton } onClick={ () => setPage(page + 1) }>More episodes</button>
+        { episodesCount > episodesPerPage * overviewContext.page && (
+          <button className={ styles.loadMoreButton } onClick={ () => overviewContext.setPage(overviewContext.page + 1) }>More episodes</button>
         ) }
 
       </div>
