@@ -525,6 +525,10 @@
     flex-direction: column;
     gap: .5em;
     padding-left: 2em;
+
+    + p {
+      margin-top: 1em;
+    }
   }
 }
 
