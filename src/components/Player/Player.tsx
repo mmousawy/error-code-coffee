@@ -125,6 +125,7 @@ export default function Player() {
                     onChange={ (e) => { playerContext.setPlaybackSpeed(e?.value); } }
                     menuPlacement='top'
                     isSearchable={ false }
+                    aria-label='Playback speed'
                     styles={ {
                       control: (baseStyles, state) => ({
                         ...baseStyles,
